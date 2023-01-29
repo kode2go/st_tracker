@@ -55,8 +55,8 @@ def convert_df(df):
 db_content = db.fetch().items
 df = pd.DataFrame.from_dict(db_content)
 df = df.sort_values(by=['h_time'])
-df[4] = df[4].astype(int)
-st.write(df.sum())
+# df[4] = df[4].astype(int)
+# st.write(df.sum())
 csv = convert_df(df)
 st.dataframe(df)
 st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
