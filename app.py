@@ -40,7 +40,7 @@ if (QP + QF) == QTY:
 
 
 if st.button('Submit'):
-    db.put({"a_operator": OP,"b_Lot_num": Lot_num,"c_QTY": QTY,"d_QTY_of_passed": QTY_of_passed,"e_QTY_of_failed": QTY_of_failed,"f_Available": Available,"g_Balance": Balance,"h_time": timestampStr })
+    db.put({"a_operator": OP,"b_Lot_num": Lot_num,"c_QTY": QTY,"d_QTY_of_passed": QTY_of_passed,"e_QTY_of_failed": QTY_of_failed,"f_Available": QTY_of_passed,"g_Balance": Balance,"h_time": timestampStr })
 
 #     new_row = pd.Series([timestampStr, chatbot_input, answer], index=df.columns)
 #     df = df.append(new_row,ignore_index=True) 
