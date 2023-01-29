@@ -54,7 +54,7 @@ def convert_df(df):
 
 db_content = db.fetch().items
 df = pd.DataFrame.from_dict(db_content)
-df.sort_values(by=['h_time'])
+df.sort_values(by=['h_time'],ascending=False)
 csv = convert_df(df)
 st.dataframe(df)
 st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
