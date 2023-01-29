@@ -1,55 +1,58 @@
-import openai
 import streamlit as st
 from datetime import datetime
 import pandas as pd
 
-openai.api_key = st.secrets["api_secret"]
-df = pd.DataFrame(columns=['Timestamp', 'Question', 'Response'])
-
+dateTimeObj = datetime.now()
+timestampStr = dateTimeObj.strftime("%d-%b-%Y_%H:%M:%S")
 
 from deta import Deta
 # Connect to Deta Base with your Project Key
 deta = Deta(st.secrets["deta_key"])
-db = deta.Base("example-db3")
+db = deta.Base("example-db4_tracker")
 # db.put({"name": "test123", "age": 50})
 
 """
-# Welcome to My Hospital Chatbot!
+# Welcome to My Tracker App
 
-Feel free to ask any questions below:
+Tracking the parts test processing
 
 """
+QTY_of_failed = 0
+QTY_of_passed = 0
+QTY = int(st.text_input('Tracking the parts test processing:',''))
+Lot_num = st.text_input('Please enter the lot number','')
+OP = st.text_input('Please enter Operator name:','')
 
-chatbot_input = st.text_input('Ask a question?','What is an angiogram?')
-chatbot_input = chatbot_input + '?'
+QTY_of_passed = st.text_input("Please enter the quantity of passed parts:  ")
 
-if st.button('Submit'):
-    dateTimeObj = datetime.now()
-    timestampStr = dateTimeObj.strftime("%d-%b-%Y_%H:%M:%S")
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=chatbot_input,
-        temperature=0.5
-    )
+QTY_of_failed = st.text_input("Please enter the quantity of failed parts:  ")
 
-    answer = response["choices"][0]["text"]
-    st.write(answer)
-    print(answer)
-    db.put({"a_time_stamp": timestampStr,"b_input": chatbot_input,"c_answer": answer })
+QP = int(QTY_of_passed)
+QF = int(QTY_of_failed)
+
+if (QP + QF) == QTY:    
+    st.write(f"There are {QP} available parts to distributing ")
+    Distributed = int(st.text_int("Please enter how many parts are distributed?  "))
+    if Distributed <= QP:        
+        Balance1 = QP - Distributed
+        Balance = Balance1
+        print(f"You have {Balance1} parts left as balance ")
+
+
+db.put({"a_operator": OP,"b_Lot_num": Lot_num,"c_QTY": QTY,"d_QTY_of_passed": QTY_of_passed,"e_QTY_of_failed": QTY_of_failed,"f_Available": Available,"g_Balance": Balance,"h_time": timestampStr })
 
 #     new_row = pd.Series([timestampStr, chatbot_input, answer], index=df.columns)
 #     df = df.append(new_row,ignore_index=True) 
 #     df.to_csv('submissions.csv', mode='a', index=False, header=False)
 
-admin_input = st.text_input('Admin','Admin')
+
 
 @st.experimental_memo
 def convert_df(df):
    return df.to_csv(index=False)
 
-if st.button('Display') and admin_input == "1234":
-    db_content = db.fetch().items
-    df = pd.DataFrame.from_dict(db_content)
-    csv = convert_df(df)
-    st.dataframe(df)
-    st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
+db_content = db.fetch().items
+df = pd.DataFrame.from_dict(db_content)
+csv = convert_df(df)
+st.dataframe(df)
+st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
