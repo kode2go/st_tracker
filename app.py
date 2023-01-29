@@ -19,13 +19,13 @@ Tracking the parts test processing
 """
 QTY_of_failed = 0
 QTY_of_passed = 0
-QTY = int(st.text_input('Tracking the parts test processing:',''))
-Lot_num = st.text_input('Please enter the lot number','')
-OP = st.text_input('Please enter Operator name:','')
+QTY = int(st.text_input('Tracking the parts test processing:','100'))
+Lot_num = st.text_input('Please enter the lot number','qwe')
+OP = st.text_input('Please enter Operator name:','Sina')
 
-QTY_of_passed = st.text_input("Please enter the quantity of passed parts:  ")
+QTY_of_passed = st.text_input("Please enter the quantity of passed parts:  ",'90')
 
-QTY_of_failed = st.text_input("Please enter the quantity of failed parts:  ")
+QTY_of_failed = st.text_input("Please enter the quantity of failed parts:  ",'10')
 
 QP = int(QTY_of_passed)
 QF = int(QTY_of_failed)
@@ -39,7 +39,8 @@ if (QP + QF) == QTY:
         print(f"You have {Balance1} parts left as balance ")
 
 
-db.put({"a_operator": OP,"b_Lot_num": Lot_num,"c_QTY": QTY,"d_QTY_of_passed": QTY_of_passed,"e_QTY_of_failed": QTY_of_failed,"f_Available": Available,"g_Balance": Balance,"h_time": timestampStr })
+if st.button('Submit'):
+    db.put({"a_operator": OP,"b_Lot_num": Lot_num,"c_QTY": QTY,"d_QTY_of_passed": QTY_of_passed,"e_QTY_of_failed": QTY_of_failed,"f_Available": Available,"g_Balance": Balance,"h_time": timestampStr })
 
 #     new_row = pd.Series([timestampStr, chatbot_input, answer], index=df.columns)
 #     df = df.append(new_row,ignore_index=True) 
