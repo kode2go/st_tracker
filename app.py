@@ -32,7 +32,7 @@ QF = int(QTY_of_failed)
 
 if (QP + QF) == QTY:    
     st.write(f"There are {QP} available parts to distributing ")
-    Distributed = int(st.text_int("Please enter how many parts are distributed?  "))
+    Distributed = int(st.text_input("Please enter how many parts are distributed?  ",'40'))
     if Distributed <= QP:        
         Balance1 = QP - Distributed
         Balance = Balance1
