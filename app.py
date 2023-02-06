@@ -60,6 +60,12 @@ db_content = db.fetch().items
 df = pd.DataFrame.from_dict(db_content)
 df = df.sort_values(by=['h_time'])
 
+df['d_QTY_of_passed'] = df['d_QTY_of_passed'].astype(int)
+
+df['e_QTY_of_failed'] = df['e_QTY_of_failed'].astype(int)
+
+df['f_Available'] = df['f_Available'].astype(int)
+
 passed_sum = df['d_QTY_of_passed']
 failed_sum = df['e_QTY_of_failed']
 avail_sum = df['f_Available']
