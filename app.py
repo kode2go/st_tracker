@@ -70,11 +70,15 @@ passed_sum = df['d_QTY_of_passed'].sum()
 failed_sum = df['e_QTY_of_failed'].sum()
 avail_sum = df['f_Available'].sum()
 
-st.metric(label="Sum of Quantity Passed", value=passed_sum)
-st.metric(label="Sum of Quantity Failed", value=failed_sum)
-st.metric(label="Sum of Quantity Available", value=avail_sum)
+
 # df[4] = df[4].astype(int)
 # st.write(df.sum())
 csv = convert_df(df)
 st.dataframe(df)
+
+col1, col2, col3 = st.columns(3)
+col1.metric(label="Sum of Quantity Passed", value=passed_sum)
+col2.metric(label="Sum of Quantity Failed", value=failed_sum)
+col3.metric(label="Sum of Quantity Available", value=avail_sum)
+
 st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
