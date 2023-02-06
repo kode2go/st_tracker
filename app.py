@@ -96,6 +96,6 @@ import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
 ax.bar(df['Metric'], df['Value'], color=['blue', 'red', 'green'])
-
-st.pyplot()
+# st.set_option('deprecation.showPyplotGlobalUse', False)
+st.pyplot(fig)
 
