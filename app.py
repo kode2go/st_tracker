@@ -82,3 +82,18 @@ col2.metric(label="Sum of Quantity Failed", value=failed_sum)
 col3.metric(label="Sum of Quantity Available", value=avail_sum)
 
 st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
+
+import matplotlib.pyplot as plt
+
+data = {'Metric': ['Sum of Quantity Passed', 'Sum of Quantity Failed', 'Sum of Quantity Available'],
+        'Value': [passed_sum, failed_sum, avail_sum]}
+
+df = pd.DataFrame(data)
+
+df.plot(x='Metric', y='Value', kind='bar', color='blue', legend=False)
+
+plt.xlabel('Metric')
+plt.ylabel('Value')
+plt.title('Bar Chart of Metric Values')
+
+plt.show()
