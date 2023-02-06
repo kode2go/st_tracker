@@ -83,10 +83,3 @@ col3.metric(label="Sum of Quantity Available", value=avail_sum)
 
 st.download_button("Press to Download",csv,"file.csv","text/csv",key='download-csv')
 
-chart_data = pd.DataFrame(
-    [[passed_sum, failed_sum, avail_sum],[passed_sum, failed_sum, avail_sum],[passed_sum, failed_sum, avail_sum]]
-    columns=['Sum of Quantity Passed', 'Sum of Quantity Failed', 'Sum of Quantity Available'])
-
-df_sum = pd.DataFrame(chart_data)
-
-st.bar_chart(df_sum)
