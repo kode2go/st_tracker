@@ -96,6 +96,9 @@ import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
 ax.bar(df['Metric'], df['Value'], color=['blue', 'red', 'green'])
+ax.set_title('Summed Data')
+
+plt.xticks(rotation=45, ha='right')
 # st.set_option('deprecation.showPyplotGlobalUse', False)
 st.pyplot(fig)
 
