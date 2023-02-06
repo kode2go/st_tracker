@@ -50,6 +50,8 @@ if st.button("Done"):
 
 
 
+
+
 @st.experimental_memo
 def convert_df(df):
    return df.to_csv(index=False)
@@ -57,6 +59,14 @@ def convert_df(df):
 db_content = db.fetch().items
 df = pd.DataFrame.from_dict(db_content)
 df = df.sort_values(by=['h_time'])
+
+passed_sum = df['d_QTY_of_passed']
+failed_sum = df['e_QTY_of_failed']
+avail_sum = df['f_Available']
+
+st.metric(label="Sum of Quantity Passed", value=passed_sum)
+st.metric(label="Sum of Quantity Failed", value=failed_sum)
+st.metric(label="Sum of Quantity Available", value=avail_sum)
 # df[4] = df[4].astype(int)
 # st.write(df.sum())
 csv = convert_df(df)
