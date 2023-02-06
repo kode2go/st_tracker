@@ -88,5 +88,14 @@ data = {'Metric': ['Sum of Quantity Passed', 'Sum of Quantity Failed', 'Sum of Q
 
 df = pd.DataFrame(data)
 
-st.bar_chart(df, x='Metric', y='Value')
+# st.bar_chart(df, x='Metric', y='Value')
+
+import matplotlib.pyplot as plt
+
+# df = pd.DataFrame(data)
+
+fig, ax = plt.subplots()
+ax.bar(df['Metric'], df['Value'], color=['blue', 'red', 'green'])
+
+st.pyplot()
 
